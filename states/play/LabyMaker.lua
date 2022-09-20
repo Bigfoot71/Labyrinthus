@@ -4,8 +4,8 @@
     Author: Bigfoot71
     Soft version: 0.1a
 
-    Date: 09/14/2022
-    File version: 01
+    Date: 09/19/2022
+    File version: 02
 
     License:
 
@@ -58,20 +58,14 @@ function labyMaker:genMap(mapWidth,mapHeight)
 
 	-- Maze outline --
 
-	for y = 0, mapHeight do
-		labyMaker.map[0][y] = 2
-	end
-
-	for x = 0, mapWidth do
+	for x = 0, mapWidth+1 do
 		labyMaker.map[x][0] = 2
-	end
-
-	for y = 0, mapHeight do
-		labyMaker.map[mapWidth+1][y] = 2
-	end
-
-	for x = 0, mapWidth + 1 do
 		labyMaker.map[x][mapHeight+1] = 2
+	end
+
+	for y = 1, mapHeight do
+		labyMaker.map[0][y] = 2
+		labyMaker.map[mapWidth+1][y] = 2
 	end
 
 	-- Generate maze with correct path --
@@ -89,7 +83,7 @@ function labyMaker:genMap(mapWidth,mapHeight)
 		if labyMaker.map[maker.x+2][maker.y] == 1
 		or labyMaker.map[maker.x-2][maker.y] == 1
 		or labyMaker.map[maker.x][maker.y+2] == 1
-		or labyMaker.map[maker.x][maker.y-2] == 1 == true
+		or labyMaker.map[maker.x][maker.y-2] == 1
 		then
 
 			if r == 1 then
@@ -129,7 +123,7 @@ function labyMaker:genMap(mapWidth,mapHeight)
 		elseif labyMaker.map[maker.x+1][maker.y] == 0
 		or     labyMaker.map[maker.x-1][maker.y] == 0
 		or 	   labyMaker.map[maker.x][maker.y+1] == 0
-		or     labyMaker.map[maker.x][maker.y-1] == 0 == true
+		or     labyMaker.map[maker.x][maker.y-1] == 0
 		then
 
 			labyMaker.map[maker.x][maker.y] = 2
@@ -259,10 +253,10 @@ function labyMaker:draw(map, tileSize, sahder)
 			for y, value in pairs(rows) do
 
 				if value == 1 then
-					love.graphics.setColor({.8, .0, .0})
+					love.graphics.setColor(.8, 0, 0)
 					love.graphics.rectangle('fill', x*tileSize, y*tileSize, tileSize, tileSize)
 				elseif value == 2 then
-					love.graphics.setColor({.4, .0, .0})
+					love.graphics.setColor(.4, 0, 0)
 					love.graphics.rectangle('fill', x*tileSize, y*tileSize, tileSize, tileSize)
 				end
 

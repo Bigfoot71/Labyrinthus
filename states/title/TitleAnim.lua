@@ -4,8 +4,8 @@
     Author: Bigfoot71
     Soft version: 0.1a
 
-    Date: 09/14/2022
-    File version: 01
+    Date: 09/19/2022
+    File version: 02
 
     License:
 
@@ -41,9 +41,6 @@
 
 ]]
 
-local TitleAnim = {}
-TitleAnim.__index = TitleAnim
-
 local sineShader = love.graphics.newShader[[
 
     uniform vec2 imgSize;
@@ -58,12 +55,14 @@ local sineShader = love.graphics.newShader[[
         samplePos.x -= sinScale * (1.0 + sin(phase + 0.05*imgSize.y*texturePos.y));
 
         samplePos.y = texturePos.y;
-        vec4 sample = Texel(texture, samplePos);
 
-        return sample * colour;
+        return Texel(texture, samplePos) * colour;
     }
 
 ]]
+
+local TitleAnim = {}
+TitleAnim.__index = TitleAnim
 
 function TitleAnim:new()
     local self = setmetatable({}, TitleAnim)
